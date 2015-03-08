@@ -212,7 +212,7 @@ void reflector::move() {
 		y = -settings.FieldSizeY + size/2;
 		vy = 0;
 	}
-	
+    
     if(y > settings.FieldSizeY - size/2) {
 		y = settings.FieldSizeY - size/2;
 		vy = 0;
@@ -285,7 +285,7 @@ void control(unsigned char key, int x,int y) {
     }
 }
 
-void movement(unsigned char key, int x,int y) {
+void controlUp(unsigned char key, int x,int y) {
     switch(key) {
         case 'a':
             left.Up = false;
@@ -339,7 +339,7 @@ int main(int argc, char ** argv) {
 	glutDisplayFunc(draw);
 	glutTimerFunc(settings.delay,Timer,0);
 	glutKeyboardFunc(control);
-	glutKeyboardUpFunc(movement);
+	glutKeyboardUpFunc(controlUp);
 	glClearColor(0,0,1,1.0);  // could've stuck with 0,1,0 for black, like this blue better though
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
