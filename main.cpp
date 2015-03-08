@@ -54,8 +54,8 @@ public:
 	void win();
 	void KeyControl();
 	void KeyReset();
-	void DrawField();
-	void DrawScore();
+	void Draw_Field();
+	void Draw_Score();
 } settings;
 
 class ball {
@@ -142,9 +142,9 @@ void reflector::carry() {
 }
 
 /**
- * DrawField function wich draws 2D vertices using glVertex2f
+ * Draw_Field function wich draws 2D vertices using glVertex2f
  */
-void game::DrawField() {
+void game::Draw_Field() {
 	glColor3f(1,1,1); //1,1,1
 	glVertex2f(-FieldSizeX - BorderT,-FieldSizeY - BorderT);
 	glVertex2f(FieldSizeX + BorderT,-FieldSizeY - BorderT);
@@ -175,10 +175,10 @@ void game::DrawField() {
 }
 
 /**
- * DrawScore function using glutBitmapCharacter & glRasterPos
+ * drawScore function using glutBitmapCharacter & glRasterPos
  * .._9_BY_15 simply draws a bitmap fitting 9by15 pixels
  */
-void game::DrawScore() {
+void game::Draw_Score() {
 	glRasterPos2f(TextPosX - 50, TextPosY + 20);
 	glutBitmapCharacter(GLUT_BITMAP_9_BY_15, '0' + ScoreL);
 	glRasterPos2f(TextPosX + 30, TextPosY + 20);
@@ -251,7 +251,7 @@ void ball::move(){
 	y += vy;
 }
 
-void keyboard(unsigned char key, int x,int y) {
+void control(unsigned char key, int x,int y) {
     switch(key) {
         case 'a':
             left.Up = true;
@@ -285,7 +285,7 @@ void keyboard(unsigned char key, int x,int y) {
     }
 }
 
-void keyboardUp(unsigned char key, int x,int y) {
+void movement(unsigned char key, int x,int y) {
     switch(key) {
         case 'a':
             left.Up = false;
@@ -322,9 +322,9 @@ void draw() {
 	right.draw();
 	left.draw();
 	ball.draw();
-	settings.DrawField();
+	settings.Draw_Field();
 	glEnd();
-	settings.DrawScore();
+	settings.Draw_Score();
 	glutSwapBuffers();
 }
 
@@ -338,8 +338,8 @@ int main(int argc, char ** argv) {
 	glutCreateWindow("pong");
 	glutDisplayFunc(draw);
 	glutTimerFunc(settings.delay,Timer,0);
-	glutKeyboardFunc(keyboard);
-	glutKeyboardUpFunc(keyboardUp);
+	glutKeyboardFunc(control);
+	glutKeyboardUpFunc(movement);
 	glClearColor(0,0,1,1.0);  // could've stuck with 0,1,0 for black, like this blue better though
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();

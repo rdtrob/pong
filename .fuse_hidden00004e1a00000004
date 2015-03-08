@@ -1,0 +1,11 @@
+#include <iostream>
+
+using namespace std;
+
+float ballX = 20;
+float ballY = 20;
+void setup(int windoSizeX, int windowSizeY);
+
+int main() {
+    //
+}
